@@ -7,6 +7,7 @@ var pathToReactAddonsDev = path.resolve(node_modules, 'react/dist/react-with-add
 var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
 var pathToReactDOM = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js');
 var pathToReactDOMDev = path.resolve(node_modules, 'react-dom/dist/react-dom.js');
+var pathToBootstrap = path.resolve(node_modules, 'bootstrap/dist/css/');
 
 var PROD = findProductionOption();
 
@@ -15,13 +16,16 @@ module.exports = {
     resolve: {
         alias: {
             'react': PROD ? pathToReactAddons : pathToReactAddonsDev,
-            'react-dom': PROD ? pathToReactDOM : pathToReactDOMDev
+            'react-dom': PROD ? pathToReactDOM : pathToReactDOMDev,
+            'common': path.resolve('app/common'),
+            'components': path.resolve('app/components'),
+            'bootstrap': path.resolve(node_modules, 'bootstrap/dist/css/bootstrap.min.css')
         }
     },
     entry: {
         libs: ['react'],
         app: [
-            __dirname +'/app/index.js'
+            path.resolve(__dirname, 'app/index.js')
         ],
         style: PROD ? [] : []
     },
@@ -70,11 +74,12 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]_[local]!sass!'
+                loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]_[local]!' +
+                    'sass?includePaths[]=' + pathToBootstrap
             },
             {
                 test: /\.css$/,
-                loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]_[local]'
+                loader: 'style!css-loader?includePaths[]=' + pathToBootstrap + '&modules&importLoaders=1&localIdentName=[name]_[local]'
             },
             {
                 test: /\.(ttf|eot|svg|woff(2)?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
