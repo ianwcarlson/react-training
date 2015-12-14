@@ -35,21 +35,30 @@ export default class FormContainer extends React.Component{
                         label="Username"
                         onChange={this._handleInputChange.bind(this)}
                         uniqueId="username"
-                        value={this.state.username}/>
+                        value={this.state.username}
+                        placeholder="Enter username"/>
                 <div className={CSS.textInputContainer}>
                 </div>
                     <TextInput
                         label="Password"
                         onChange={this._handleInputChange.bind(this)}
                         uniqueId="password"
-                        value={this.state.password}/>
+                        value={this.state.password}
+                        placeholder="Enter password"
+                        type="password"/>
                 </div>
                 <div>
                     <span className={CSS.buttonContainer}>
-                        <Button text="Submit" buttonType="btn-primary"/>
+                        <Button
+                            text="Submit"
+                            buttonType="btn-primary"
+                            onClick={this.props.onSubmit}/>
                     </span>
                     <span className={CSS.buttonContainer}>
-                        <Button text="Cancel" buttonType="btn-default"/>
+                        <Button
+                            text="Cancel"
+                            buttonType="btn-default"
+                            onClick={this.props.onCancel}/>
                     </span>
                 </div>
             </div>

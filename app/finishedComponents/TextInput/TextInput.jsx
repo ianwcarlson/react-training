@@ -22,7 +22,7 @@ export default class TextInput extends React.Component{
             <div>
                 <label>{this.props.label}</label>
                 <input
-                    type="text"
+                    type={this.props.type}
                     className={inputClasses}
                     placeholder={this.props.placeholder}
                     value={this.props.value}
@@ -35,5 +35,6 @@ export default class TextInput extends React.Component{
 TextInput.defaultProps = {
     label: '',
     placeholder: '',
-    uniqueId: 'TextInput'
+    uniqueId: 'TextInput',
+    type: 'text'
 };
